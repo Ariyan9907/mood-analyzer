@@ -1,30 +1,28 @@
-# Mood Analyzer
+# Mood Analyzer - UC3
 
 ## Overview
+
 Mood Analyzer is a Java application that analyzes a given mood message and returns whether the mood is **SAD** or **HAPPY**.
 
-This project is developed as part of the BridgeLabz Exception Handling assignment.
+In this Use Case, the application is enhanced to handle **NULL mood messages** by throwing a **custom exception** instead of causing a `NullPointerException`.
 
 ---
 
-## User Case 1 (UC1)
+## Use Case 3 (UC3): Handle NULL Mood Using Custom Exception
 
 ### Objective
-Given a message, analyze and return the mood.
 
-### Rules
-- If the message contains **"Sad"**, return **"SAD"**.
-- Otherwise, return **"HAPPY"**.
+Handle the scenario where the user provides a `null` mood message by throwing a custom exception named `MoodAnalysisException`.
 
 ---
 
-## Example
+## Features
 
-| Input | Output |
-|-------|--------|
-| I am in Sad Mood | SAD |
-| I am in Happy Mood | HAPPY |
-| I am in Any Mood | HAPPY |
+- Analyze mood from a given message.
+- Return **SAD** when the message contains `"Sad"`.
+- Return **HAPPY** for all other valid messages.
+- Throw `MoodAnalysisException` when the mood message is `null`.
+- Use an **Enum** to identify the exception type.
 
 ---
 
@@ -34,11 +32,13 @@ Given a message, analyze and return the mood.
 MoodAnalyzer
 │
 ├── src
-│   ├── com.bridgelabz.moodanalyzer
-│   │      └── MoodAnalyzer.java
-│   │
-│   └── com.bridgelabz.test
-│          └── MoodAnalyzerTest.java
+│
+├── com.bridgelabz.moodanalyzer
+│      ├── MoodAnalyzer.java
+│      └── Main.java
+│
+├── com.bridgelabz.exception
+│      └── MoodAnalysisException.java
 │
 └── README.md
 ```
@@ -48,29 +48,28 @@ MoodAnalyzer
 ## Technologies Used
 
 - Java
-- JUnit 5
+- Exception Handling
+- Custom Exceptions
+- Enum
 - IntelliJ IDEA
+- Git & GitHub
 
 ---
 
-## Method
+## Algorithm
 
-```java
-public String analyseMood(String message)
-```
-
-### Parameters
-- `message` – Mood message provided by the user.
-
-### Returns
-- `"SAD"` if the message contains `"Sad"`
-- `"HAPPY"` otherwise
+1. Read the mood message.
+2. If the message is `null`, throw `MoodAnalysisException`.
+3. Otherwise, check whether the message contains `"Sad"`.
+4. Return:
+    - `SAD`
+    - `HAPPY`
 
 ---
 
-## Test Cases
+## Example
 
-### Test Case 1
+### Example 1
 
 **Input**
 
@@ -78,7 +77,7 @@ public String analyseMood(String message)
 I am in Sad Mood
 ```
 
-**Expected Output**
+**Output**
 
 ```
 SAD
@@ -86,18 +85,42 @@ SAD
 
 ---
 
-### Test Case 2
+### Example 2
 
 **Input**
 
 ```
-I am in Any Mood
+I am in Happy Mood
 ```
 
-**Expected Output**
+**Output**
 
 ```
 HAPPY
+```
+
+---
+
+### Example 3
+
+**Input**
+
+```
+null
+```
+
+**Output**
+
+```
+Mood should not be null
+```
+
+---
+
+## Exception Type
+
+```java
+NULL_MOOD
 ```
 
 ---
@@ -106,20 +129,36 @@ HAPPY
 
 1. Clone the repository.
 2. Open the project in IntelliJ IDEA.
-3. Run `MoodAnalyzerTest`.
-4. Verify that all test cases pass successfully.
+3. Run `Main.java`.
+4. Test with valid and null mood messages.
+5. Observe the returned mood or exception message.
+
+---
+
+## Expected Output
+
+```
+Input : I am in Sad Mood
+Output: SAD
+
+Input : I am in Happy Mood
+Output: HAPPY
+
+Input : null
+Output: Mood should not be null
+```
 
 ---
 
 ## Future Enhancements
 
-- Refactor to use constructors.
-- Handle `null` and empty mood messages.
-- Implement custom exceptions.
-- Add reflection-based object creation.
+- Handle Empty Mood.
+- Add Reflection support.
+- Create objects dynamically using Reflection API.
+- Add JUnit test cases.
 
 ---
 
 ## Author
 
-Aryan Pujari
+**Aryan Pujari**
