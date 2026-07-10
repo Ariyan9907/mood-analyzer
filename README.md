@@ -1,4 +1,4 @@
-# Mood Analyzer - UC4
+# Mood Analyzer 
 
 ## Overview
 
