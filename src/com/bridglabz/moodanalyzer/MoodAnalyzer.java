@@ -18,6 +18,10 @@ public class MoodAnalyzer {
         if(msg==null){
             throw new MoodAnalysisException("Null Msg not allowed");
         }
+
+        if(msg.isEmpty()){
+            throw new MoodAnalysisException("msg cannote be empty");
+        }
         if(msg.contains("Sad")){
             return "SAD";
         }

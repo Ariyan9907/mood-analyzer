@@ -1,28 +1,35 @@
-# Mood Analyzer - UC3
+# Mood Analyzer - UC4
 
 ## Overview
 
-Mood Analyzer is a Java application that analyzes a given mood message and returns whether the mood is **SAD** or **HAPPY**.
+Mood Analyzer is a Java application that analyzes a given mood message and determines whether the mood is **SAD** or **HAPPY**.
 
-In this Use Case, the application is enhanced to handle **NULL mood messages** by throwing a **custom exception** instead of causing a `NullPointerException`.
+This Use Case enhances the application by handling **NULL** and **EMPTY** mood messages using a **Custom Exception** (`MoodAnalysisException`) and **Enum**.
 
 ---
 
-## Use Case 3 (UC3): Handle NULL Mood Using Custom Exception
+## Use Case 4 (UC4): Handle Empty Mood Using Custom Exception
 
 ### Objective
 
-Handle the scenario where the user provides a `null` mood message by throwing a custom exception named `MoodAnalysisException`.
+Validate the mood message before analyzing it.
+
+- Throw `MoodAnalysisException` if the mood is **NULL**.
+- Throw `MoodAnalysisException` if the mood is **EMPTY**.
+- Return **SAD** if the message contains `"Sad"`.
+- Otherwise return **HAPPY**.
 
 ---
 
 ## Features
 
-- Analyze mood from a given message.
-- Return **SAD** when the message contains `"Sad"`.
-- Return **HAPPY** for all other valid messages.
-- Throw `MoodAnalysisException` when the mood message is `null`.
-- Use an **Enum** to identify the exception type.
+- Analyze mood messages.
+- Constructor-based initialization.
+- Handle NULL mood.
+- Handle EMPTY mood.
+- Custom Exception (`MoodAnalysisException`).
+- Enum-based exception types.
+- Manual testing using `Main.java`.
 
 ---
 
@@ -56,18 +63,28 @@ MoodAnalyzer
 
 ---
 
-## Algorithm
+## Exception Types
 
-1. Read the mood message.
-2. If the message is `null`, throw `MoodAnalysisException`.
-3. Otherwise, check whether the message contains `"Sad"`.
-4. Return:
-    - `SAD`
-    - `HAPPY`
+```java
+public enum ExceptionType {
+    NULL_MOOD,
+    EMPTY_MOOD
+}
+```
 
 ---
 
-## Example
+## Algorithm
+
+1. Read the mood message.
+2. If the message is `null`, throw `MoodAnalysisException` with `NULL_MOOD`.
+3. If the message is empty (`""`), throw `MoodAnalysisException` with `EMPTY_MOOD`.
+4. If the message contains `"Sad"`, return `SAD`.
+5. Otherwise, return `HAPPY`.
+
+---
+
+## Sample Input & Output
 
 ### Example 1
 
@@ -117,10 +134,18 @@ Mood should not be null
 
 ---
 
-## Exception Type
+### Example 4
 
-```java
-NULL_MOOD
+**Input**
+
+```
+""
+```
+
+**Output**
+
+```
+Mood should not be empty
 ```
 
 ---
@@ -130,7 +155,10 @@ NULL_MOOD
 1. Clone the repository.
 2. Open the project in IntelliJ IDEA.
 3. Run `Main.java`.
-4. Test with valid and null mood messages.
+4. Test the application using:
+   - Valid mood
+   - NULL mood
+   - EMPTY mood
 5. Observe the returned mood or exception message.
 
 ---
@@ -146,16 +174,19 @@ Output: HAPPY
 
 Input : null
 Output: Mood should not be null
+
+Input : ""
+Output: Mood should not be empty
 ```
 
 ---
 
 ## Future Enhancements
 
-- Handle Empty Mood.
-- Add Reflection support.
 - Create objects dynamically using Reflection API.
+- Invoke methods using Reflection.
 - Add JUnit test cases.
+- Add Object Equality validation.
 
 ---
 
